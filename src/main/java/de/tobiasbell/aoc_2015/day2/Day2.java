@@ -1,6 +1,4 @@
-package de.tobiasbell.aoc_2015;
-
-import lombok.Value;
+package de.tobiasbell.aoc_2015.day2;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,12 +22,9 @@ public class Day2 {
                 .sum();
     }
 
-    @Value
-    public static class Box {
-        int length;
-        int height;
-        int width;
 
+    @edu.umd.cs.findbugs.annotations.SuppressFBWarnings("EQ_UNUSUAL")
+    public static record Box(long length, long height, long width) {
         public static Box of(final String input) {
             final List<Integer> dimensions = Stream.of(input.split("x"))
                     .map(Integer::parseInt)

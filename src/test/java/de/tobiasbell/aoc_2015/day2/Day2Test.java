@@ -1,4 +1,4 @@
-package de.tobiasbell.aoc_2015;
+package de.tobiasbell.aoc_2015.day2;
 
 import de.tobiasbell.aoc_2015.util.InputReader;
 import org.junit.jupiter.api.Test;

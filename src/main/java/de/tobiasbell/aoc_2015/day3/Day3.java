@@ -1,6 +1,6 @@
-package de.tobiasbell.aoc_2015;
+package de.tobiasbell.aoc_2015.day3;
 
-import lombok.Value;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -27,7 +27,7 @@ public class Day3 {
     private static String roboSantaDirections(String directions) {
         final StringBuilder builder = new StringBuilder();
         for (int i = 1; i < directions.length(); i += 2) {
-            builder.append(directions.substring(i, i+1));
+            builder.append(directions.charAt(i));
         }
         return builder.toString();
     }
@@ -35,7 +35,7 @@ public class Day3 {
     private static String santaDirections(String directions) {
         final StringBuilder builder = new StringBuilder();
         for (int i = 0; i < directions.length(); i += 2) {
-            builder.append(directions.substring(i, i+1));
+            builder.append(directions.charAt(i));
         }
         return builder.toString();
     }
@@ -45,14 +45,13 @@ public class Day3 {
                 .mapToObj(c -> Move.of((char) c))
                 .collect(Collectors.toList());
         final Iterator<Move> iterator = moves.iterator();
-        final Set<Point> points = Stream.iterate(new Point(0, 0),
+        return Stream.iterate(new Point(0, 0),
                 point -> point.add(iterator.next().getDirection()))
                 .limit(moves.size() + 1)
                 .collect(Collectors.toSet());
-        return points;
     }
 
-    public static enum Move {
+    public enum Move {
         NORTH('^', Point.of(1, 0)),
         SOUTH('v', Point.of(-1, 0)),
         EAST('>', Point.of(0, 1)),
@@ -78,14 +77,16 @@ public class Day3 {
         }
     }
 
-    @Value(staticConstructor = "of")
-    public static class Point {
-        int x;
-        int y;
+    @SuppressFBWarnings("EQ_UNUSUAL")
+    public static record Point(int x, int y) {
+
+        public static Point of(int x, int y) {
+            return new Point(x, y);
+        }
 
         public Point add(final Point other) {
-            return new Point(this.x + other.getX(),
-                    this.y + other.getY());
+            return new Point(this.x + other.x(),
+                    this.y + other.y());
         }
     }
 }

@@ -1,4 +1,4 @@
-package de.tobiasbell.aoc_2015;
+package de.tobiasbell.aoc_2015.day4;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -22,11 +22,11 @@ public class Day4 {
     }
 
     private static boolean startsWith6Zeroes(String s) {
-        return s.substring(0, 6).equals("000000");
+        return s.startsWith("000000");
     }
 
 
     private static boolean startsWith5Zeroes(String s) {
-        return s.substring(0, 5).equals("00000");
+        return s.startsWith("00000");
     }
 }

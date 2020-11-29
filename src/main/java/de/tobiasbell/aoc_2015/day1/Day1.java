@@ -1,4 +1,4 @@
-package de.tobiasbell.aoc_2015;
+package de.tobiasbell.aoc_2015.day1;
 
 public class Day1 {
 
