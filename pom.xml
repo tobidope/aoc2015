@@ -10,9 +10,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.release>15</maven.compiler.release>
     <assertj-core.version>3.18.1</assertj-core.version>
-    <lombok.version>1.18.16</lombok.version>
   </properties>
 
   <dependencyManagement>
@@ -55,10 +55,32 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.6</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <compilerArgs>--enable-preview</compilerArgs>
+          <compilerArgs>
+            <arg>--enable-preview</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>
@@ -81,7 +103,7 @@
             <configuration>
               <rules>
                 <requireMavenVersion>
-                  <version>3.2</version>
+                  <version>3.3.9</version>
                 </requireMavenVersion>
               </rules>
             </configuration>
